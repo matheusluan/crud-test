@@ -47,7 +47,7 @@ const AppNavigator = () => {
         name="Company"
         component={CompanyScreen}
         options={{
-          tabBarLabel: 'Company',
+          tabBarLabel: 'Companies',
           tabBarIcon: ({ color, size }) => (
             <Icon name='package' size={20} color={color} />
           ),

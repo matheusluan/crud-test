@@ -7,6 +7,7 @@ import Input from '../../components/Input';
 import { Select } from '../../components/Select';
 import { iOption } from '../../interfaces/iOption';
 import MyButton from '../../components/MyButton';
+import { Header, HeaderText } from './styles';
 
 type UserScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'User'>;
@@ -58,6 +59,10 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
   return (
     <KeyboardAwareScrollView contentContainerStyle={{ padding: 10, paddingTop: 40, justifyContent: 'center', alignItems: 'center' }}>
 
+      <Header>
+        <HeaderText> User Profile</HeaderText>
+      </Header>
+
       <RowJustifyCenter>
         <Input placeholder="Name" value={name} onChangeText={setName} />
       </RowJustifyCenter>
@@ -82,7 +87,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
         openOptions={openOptions}
         value={selectedOption || null}
       />
-      
+
       <RowJustifyBetween>
         <Input placeholder="E-mail" value={email} onChangeText={setEmail} half={true} />
         <Input placeholder="E-mail" value={email} onChangeText={setEmail} half={true} />
@@ -97,7 +102,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
         <MyButton style={{ flex: 1 }} title="Modify" onPress={() => { console.log("Pressed Modify") }} />
         <MyButton style={{ flex: 1 }} title="Delete" onPress={() => { console.log("Pressed Delete") }} />
       </RowJustifyBetween>
-      
+
       <MyButton style={{ width: "100%", backgroundColor: "#383838" }} title="Query" onPress={() => { console.log("Pressed Query") }} />
 
       <MyButton style={{ width: "100%" }} icon="arrow-forward-sharp" title="Next" onPress={() => { console.log("Pressed Query") }} />

@@ -16,7 +16,8 @@ type UserScreenProps = {
 const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
 
   //States form
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [streetName, setStreetName] = useState('');
   const [streetNumber, setStreetNumber] = useState('');
   const [poBox, setPoBox] = useState('');
@@ -64,7 +65,10 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
       </Header>
 
       <RowJustifyCenter>
-        <Input placeholder="Name" value={name} onChangeText={setName} />
+        <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} />
+      </RowJustifyCenter>
+      <RowJustifyCenter>
+        <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} />
       </RowJustifyCenter>
       <RowJustifyBetween>
         <Input placeholder="Street Name" value={streetName} onChangeText={setStreetName} half={true} />

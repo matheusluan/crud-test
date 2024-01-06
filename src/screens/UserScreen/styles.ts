@@ -16,3 +16,24 @@ export const HeaderText = styled.Text`
   color: white;
   font-weight: 700;
 `;
+
+export const Container = styled.View`
+  flex: 1;
+  justifyContent: 'center';
+  alignItems: 'center';
+`;
+
+export const ModalContainer = styled.View`
+  flex: 1;
+  justifyContent: 'center';
+  alignItems: 'center';
+  backgroundColor: 'rgba(229,229,229, 0.9)';
+`;
+
+export const ModalContent = styled.View`
+  backgroundColor: 'white';
+  padding: 20px;
+  borderRadius: 10px;
+  alignItems: 'center';
+`;
+

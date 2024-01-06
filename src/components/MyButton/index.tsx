@@ -7,12 +7,13 @@ interface MyButtonProps extends TouchableOpacityProps {
     title: string;
     icon?: string;
 }
+
 export default function MyButton({ title, style, icon, ...rest }: MyButtonProps) {
     return (
         <ButtonContainer {...rest} style={[style]}>
             {
                 icon &&
-                <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'center', alignItems: 'center' }}>               
                     <Text style={styles.text}>{title}</Text>
                     <Icon name={icon} size={20} color="#FFF" />
                 </View>

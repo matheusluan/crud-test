@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../utils/types';
-import { RowJustifyBetween, RowJustifyCenter } from '../../global/styles_global';
+import { RowJustifyBetween, RowJustifyCenter, styles } from '../../global/styles_global';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Input from '../../components/Input';
 import { Select } from '../../components/Select';
 import { iOption } from '../../interfaces/iOption';
 import MyButton from '../../components/MyButton';
-import { Header, HeaderText } from './styles';
+import { Header, HeaderText, ModalContainer, ModalContent } from './styles';
+import { Modal, TouchableOpacity, View, Text, Alert } from 'react-native';
+import UserList from '../../components/UserList';
+import { iUser } from '../../interfaces/iUser';
+import axios from 'axios';
 
 type UserScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'User'>;
@@ -31,13 +35,87 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<iOption | null>();
 
-  function handleCadastro() {
-    throw new Error('Function not implemented.');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  async function handleCadastro() {
+
+    //Verification of fields
+    if (
+      !firstName ||
+      !lastName ||
+      !streetName ||
+      !streetNumber ||
+      !poBox ||
+      !city ||
+      !state ||
+      !zipCode ||
+      !country ||
+      !email ||
+      !password ||
+      !confirmPassword
+    ) {
+      Alert.alert('Atention!', 'Missing fields. Please, review!');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Atention!', 'Passwords are different. Please, review!');
+      return;
+    }
+
+    const newUser: iUser = {
+      _id: '',
+      firstName: firstName,
+      lastName: lastName,
+      streetName: streetName,
+      streetNumber: streetNumber,
+      poBox: poBox,
+      city: city,
+      country: country,
+      email: email,
+      password: password,
+    };
+
+
+    try {
+      const response = await axios.post('http://192.168.1.5:3333/v1/user', newUser);
+
+      if (response) {
+        Alert.alert('Sucess!', 'User created');
+
+        setFirstName('');
+        setLastName('');
+        setStreetName('');
+        setStreetNumber('');
+        setPoBox('');
+        setCity('');
+        setState('');
+        setZipCode('');
+        setCountry('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('')
+        setSelectedOption(undefined);
+      }
+
+    } catch (error) {
+      Alert.alert('Erro!', 'User not created');
+    }
+
   }
 
   function handleSelectedOption(op: iOption) {
     if (op) {
       setSelectedOption(op);
+      setCountry(op.descricao);
       setOpenOptions(false);
     }
   }
@@ -56,6 +134,8 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
     { 'id': '11', 'descricao': 'South Africa' },
     { 'id': '12', 'descricao': 'Mexico' }
   ];
+
+
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={{ padding: 10, paddingTop: 40, justifyContent: 'center', alignItems: 'center' }}>
@@ -102,14 +182,25 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
       </RowJustifyBetween>
 
       <RowJustifyBetween>
-        <MyButton style={{ flex: 1 }} title="Add" onPress={() => { console.log("Pressed Add") }} />
+        <MyButton style={{ flex: 1 }} title="Add" onPress={() => { handleCadastro() }} />
         <MyButton style={{ flex: 1 }} title="Modify" onPress={() => { console.log("Pressed Modify") }} />
         <MyButton style={{ flex: 1 }} title="Delete" onPress={() => { console.log("Pressed Delete") }} />
       </RowJustifyBetween>
 
-      <MyButton style={{ width: "100%", backgroundColor: "#383838" }} title="Query" onPress={() => { console.log("Pressed Query") }} />
+      <MyButton style={{ width: "100%", backgroundColor: "#383838" }} title="Query" onPress={() => { setModalVisible(true) }} />
 
       <MyButton style={{ width: "100%" }} icon="arrow-forward-sharp" title="Next" onPress={() => { console.log("Pressed Query") }} />
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+      >
+        <ModalContainer>
+          <UserList onClose={closeModal} />
+        </ModalContainer>
+      </Modal>
 
     </KeyboardAwareScrollView >
   );

@@ -6,10 +6,11 @@ interface InputProps extends TextInputProps {
   readOnly?: boolean;
   numericOnly?: boolean;
   half?: boolean;
+  password?: boolean;
 }
 
 export default function Input(props: InputProps) {
-  const { readOnly, numericOnly, half, ...restProps } = props;
+  const { readOnly, numericOnly, half, password, ...restProps } = props;
 
   const handleTextChange = (text: string) => {
     restProps.onChangeText?.(text);
@@ -18,6 +19,7 @@ export default function Input(props: InputProps) {
   return (
     <TextInput
       placeholderTextColor="#000"
+      secureTextEntry={password}
       style={[
         half ? styles.halfInput : styles.input,
         readOnly && styles.readOnlyInput,

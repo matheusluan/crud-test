@@ -4,6 +4,9 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
+  halfContainer: {
+    flex: 1,
+  },
   label: {
     marginLeft: 10,
     marginTop: 10,
@@ -41,7 +44,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center'
   },
   backButton: {
     flex: 1,

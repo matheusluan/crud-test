@@ -4,8 +4,10 @@ export interface iUser {
     firstName: string;
     lastName: string;
     streetName: string;
-    streetNumber:string; 
-    poBox:string; 
+    streetNumber: string;
+    poBox: string;
+    state: string;
+    zipCode: string;
     city: string;
     country: string;
     email: string;

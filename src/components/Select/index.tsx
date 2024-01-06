@@ -12,13 +12,15 @@ type SelectProps = {
   openOptions: boolean;
   value: iOption | null;
   icon: string;
+  half?: boolean;
+  text: string;
 };
 
-export function Select({ value, onSelect, icon, options, openOptions, setOpenOptions }: SelectProps) {
+export function Select({ value, onSelect, icon, options, openOptions, half, text, setOpenOptions }: SelectProps) {
 
   return (
     <>
-      <View style={styles.container}>
+      <View style={[styles.container, half && styles.halfContainer]}>
         <TouchableOpacity
           onPress={() => setOpenOptions(true)}
           style={styles.optionButton}
@@ -27,7 +29,7 @@ export function Select({ value, onSelect, icon, options, openOptions, setOpenOpt
             < Text style={styles.optionText}>{value?.descricao}</Text>
           }
           {(value == undefined || value == null) &&
-            < Text style={styles.optionText}>Country</Text>
+            < Text style={styles.optionText}>{text}</Text>
           }
 
           {icon && (
@@ -56,7 +58,7 @@ export function Select({ value, onSelect, icon, options, openOptions, setOpenOpt
                   style={styles.icon}
                 />
               </TouchableOpacity>
-              <Text style={styles.modalHeaderText}>Select a contry!</Text>
+              <Text style={styles.modalHeaderText}>Select a {text}!</Text>
             </View>
             <View style={styles.optionItem}>
               <FlatList

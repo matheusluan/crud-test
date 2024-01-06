@@ -1,39 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { iUser } from '../../interfaces/iUser';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface UserListProps {
     onClose: () => void;
+    users: iUser[];
 }
 
-const UserList: React.FC<UserListProps> = ({ onClose }) => {
-    const [loading, setLoading] = useState(true);
-    const [users, setUsers] = useState<iUser[]>([]);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get<iUser[]>('http://192.168.1.5:3333/v1/user');
-                setUsers(response.data);
-            } catch (error) {
-                console.error('Erro ao buscar usuários:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUsers();
-    }, []);
-
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
+const UserList: React.FC<UserListProps> = ({ onClose, users }) => {
 
     return (
         <View style={{ flex: 1, padding: 16 }}>
@@ -46,7 +22,7 @@ const UserList: React.FC<UserListProps> = ({ onClose }) => {
 
             <FlatList
                 data={users}
-                keyExtractor={(item) => item._id }
+                keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
                     <View style={{ marginBottom: 10, backgroundColor: '#fff', padding: 10, marginVertical: 10, borderRadius: 5 }}>
                         <Text>{`ID: ${item._id}`}</Text>
@@ -54,6 +30,8 @@ const UserList: React.FC<UserListProps> = ({ onClose }) => {
                         <Text>{`Email: ${item.email}`}</Text>
                         <Text>{`Address: ${item.streetName} ${item.streetNumber}`}</Text>
                         <Text>{`Pobox: ${item.poBox}`}</Text>
+                        <Text>{`ZipCode: ${item.zipCode}`}</Text>
+                        <Text>{`State: ${item.state}`}</Text>
                         <Text>{`City: ${item.city}`}</Text>
                         <Text>{`Country: ${item.country}`}</Text>
                     </View>

@@ -10,11 +10,13 @@ export const Header = styled.View`
   margin: 10px 0;
   border-radius: 8px;
   padding: 2px;
+  gap: 2px;
 `;
 
 export const HeaderText = styled.Text`
   color: white;
   font-weight: 700;
+  margin-left: 15px;
 `;
 
 export const Container = styled.View`

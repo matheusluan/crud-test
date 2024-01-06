@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { iUser } from '../../interfaces/iUser';
+import { iCompany } from '../../interfaces/iCompany';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-interface UserListProps {
+interface CompanyListProps {
     onClose: () => void;
-    users: iUser[];
+    selectCompany: (selectedCompany: iCompany) => void;
+    companies: iCompany[];
 }
 
-const UserList: React.FC<UserListProps> = ({ onClose, users }) => {
+const CompanyList: React.FC<CompanyListProps> = ({ onClose, selectCompany, companies }) => {
 
     return (
         <View style={{ flex: 1, padding: 16 }}>
@@ -16,16 +17,16 @@ const UserList: React.FC<UserListProps> = ({ onClose, users }) => {
                 <TouchableOpacity onPress={onClose} style={{ flex: 0.1, justifyContent: 'center', alignItems: 'center', width: 20, height: 20, borderWidth: 1, borderColor: 'gray', borderRadius: 5 }}>
                     <Icon name='close' size={15} color='black' />
                 </TouchableOpacity>
-                <Text style={{ fontWeight: '700', flex: 2, justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>User List</Text>
+                <Text style={{ fontWeight: '700', flex: 2, justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>Companies List</Text>
             </View>
 
             <FlatList
-                data={users}
+                data={companies}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
-                    <View style={{ marginBottom: 10, backgroundColor: '#fff', padding: 10, marginVertical: 10, borderRadius: 5 }}>
+                    <TouchableOpacity onPress={() => selectCompany(item)} style={{ marginBottom: 10, backgroundColor: '#fff', padding: 10, marginVertical: 10, borderRadius: 5 }}>
                         <Text>{`ID: ${item._id}`}</Text>
-                        <Text>{`Full Name: ${item.firstName} ${item.lastName}`}</Text>
+                        <Text>{`Name: ${item.name}`}</Text>
                         <Text>{`Email: ${item.email}`}</Text>
                         <Text>{`Address: ${item.streetName} ${item.streetNumber}`}</Text>
                         <Text>{`Pobox: ${item.poBox}`}</Text>
@@ -33,11 +34,14 @@ const UserList: React.FC<UserListProps> = ({ onClose, users }) => {
                         <Text>{`State: ${item.state}`}</Text>
                         <Text>{`City: ${item.city}`}</Text>
                         <Text>{`Country: ${item.country}`}</Text>
-                    </View>
+                        <Text>{`Telephone: ${item.telephone}`}</Text>
+                        <Text>{`Fax: ${item.fax}`}</Text>
+                        <Text>{`Type: ${item.type}`}</Text>
+                    </TouchableOpacity>
                 )}
             />
         </View >
     );
 };
 
-export default UserList;
+export default CompanyList;

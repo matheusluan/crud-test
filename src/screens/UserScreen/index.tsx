@@ -62,10 +62,6 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
   const closeModal = () => {
     setModalVisible(false);
   };

@@ -34,7 +34,7 @@ const AppNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Users"
+        name="User"
         component={UserScreen}
         options={{
           tabBarLabel: 'Users',

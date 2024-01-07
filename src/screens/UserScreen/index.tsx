@@ -88,7 +88,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
     };
 
     try {
-      const response = await axios.post('http://192.168.1.5:3333/v1/user', newUser);
+      const response = await axios.post('https://api-test-ui2f.onrender.com/v1/user', newUser);
 
       if (response) {
         Alert.alert('Sucess!', 'User created');
@@ -118,7 +118,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
             onPress: async () => {
               try {
                 setLoading(true);
-                const response = await axios.delete('http://192.168.1.5:3333/v1/user/' + user._id);
+                const response = await axios.delete('https://api-test-ui2f.onrender.com/v1/user/' + user._id);
 
                 if (response) {
                   Alert.alert('Sucess!', 'User deleted');
@@ -176,7 +176,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
                   password: password,
                 };
 
-                const response = await axios.put('http://192.168.1.5:3333/v1/user/' + user._id, userModified);
+                const response = await axios.put('https://api-test-ui2f.onrender.com/v1/user/' + user._id, userModified);
 
                 if (response) {
                   Alert.alert('Sucess!', 'User Modified');
@@ -311,7 +311,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get<iUser[]>('http://192.168.1.5:3333/v1/user');
+        const response = await axios.get<iUser[]>('https://api-test-ui2f.onrender.com/v1/user');
         setUsers(response.data);
 
         // Mapear iUser para iOption

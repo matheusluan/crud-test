@@ -67,7 +67,7 @@ const CompanyScreenProps: React.FC<CompanyScreenProps> = ({ navigation }) => {
     };
 
     try {
-      const response = await axios.post('http://192.168.1.5:3333/v1/companies', newCompany);
+      const response = await axios.post('https://api-test-ui2f.onrender.com/v1/companies', newCompany);
 
       if (response) {
         Alert.alert('Sucess!', 'Company created');
@@ -109,7 +109,7 @@ const CompanyScreenProps: React.FC<CompanyScreenProps> = ({ navigation }) => {
     };
 
     try {
-      const response = await axios.put('http://192.168.1.5:3333/v1/companies/' + company?._id, companyEdit);
+      const response = await axios.put('https://api-test-ui2f.onrender.com/v1/companies/' + company?._id, companyEdit);
 
       if (response) {
         Alert.alert('Sucess!', 'Company modified');
@@ -168,7 +168,7 @@ const CompanyScreenProps: React.FC<CompanyScreenProps> = ({ navigation }) => {
     setLoading(true);
     const fetchUsers = async () => {
       try {
-        const response = await axios.get<iCompany[]>('http://192.168.1.5:3333/v1/companies');
+        const response = await axios.get<iCompany[]>('https://api-test-ui2f.onrender.com/v1/companies');
         setCompanies(response.data);
       } catch (error) {
         console.error('Error at get users:', error);

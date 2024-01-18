@@ -107,7 +107,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
     if (user) {
       Alert.alert(
         'Attention',
-        'Are you shure about that?',
+        'Are you sure about that?',
         [
           {
             text: 'Cancel',
@@ -144,7 +144,7 @@ const UserScreen: React.FC<UserScreenProps> = ({ navigation }) => {
     if (user) {
       Alert.alert(
         'Attention',
-        'Are you shure about that?',
+        'Are you sure about that?',
         [
           {
             text: 'Cancel',
